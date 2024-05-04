@@ -9,7 +9,9 @@ import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
     private static final Connection connection = Util.getConnection();
-    public UserDaoJDBCImpl() {}
+
+    public UserDaoJDBCImpl() {
+    }
 
     public void createUsersTable() {
         String sql = "CREATE TABLE IF NOT EXISTS users(" +
@@ -19,7 +21,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 "age TINYINT," +
                 "PRIMARY KEY(id))";
 
-        try(Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -29,7 +31,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void dropUsersTable() {
         String sql = "DROP TABLE IF EXISTS users";
 
-        try(Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,7 +71,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
         String sql = "SELECT * FROM users";
 
-        try(Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
 
             while (resultSet.next()) {
@@ -90,7 +92,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         String sql = "TRUNCATE TABLE users";
 
-        try(Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
             statement.execute(sql);
         } catch (SQLException e) {
             e.printStackTrace();
